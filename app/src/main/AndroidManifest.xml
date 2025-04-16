@@ -13,10 +13,10 @@
         android:theme="@style/Theme.PursePulse"
         tools:targetApi="31">
         <activity
-            android:name=".Budget"
+            android:name=".Edittransaction"
             android:exported="false" />
         <activity
-            android:name=".Edittransaction"
+            android:name=".Budget"
             android:exported="false" />
         <activity
             android:name=".Addtransction"
