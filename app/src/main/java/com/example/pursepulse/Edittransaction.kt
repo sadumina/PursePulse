@@ -21,11 +21,11 @@ class Edittransaction : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // ✅ ViewBinding setup
+
         binding = ActivityEdittransactionBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // ✅ Spinner setup
+
         val categories = listOf("Food", "Transport", "Bills", "Entertainment")
         val adapter = ArrayAdapter(
             this,
@@ -34,7 +34,7 @@ class Edittransaction : AppCompatActivity() {
         )
         binding.spinnerCategory.adapter = adapter
 
-        // ✅ Restore selected category if available
+
         val prefs = getSharedPreferences(sharedPrefsFile, Context.MODE_PRIVATE)
         val savedCategory = prefs.getString(categoryKey, null)
         savedCategory?.let {
@@ -42,7 +42,6 @@ class Edittransaction : AppCompatActivity() {
             if (position >= 0) binding.spinnerCategory.setSelection(position)
         }
 
-        // ✅ Save selection to SharedPreferences
         binding.spinnerCategory.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>?, view: View?, position: Int, id: Long
@@ -62,7 +61,7 @@ class Edittransaction : AppCompatActivity() {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
 
-        // ✅ Save button logic
+
         binding.saveButton.setOnClickListener {
             val date = binding.editTextDate.text.toString()
             val amount = binding.editTextAmount.text.toString().toDoubleOrNull()
@@ -80,7 +79,7 @@ class Edittransaction : AppCompatActivity() {
 
                 if (success) {
                     Toast.makeText(this, "Transaction saved", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this, Addtransction::class.java)) // ✅ Navigate
+                    startActivity(Intent(this, Addtransction::class.java))
                     finish()
                 } else {
                     Toast.makeText(this, "Failed to save transaction", Toast.LENGTH_SHORT).show()

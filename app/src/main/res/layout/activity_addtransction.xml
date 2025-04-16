@@ -5,28 +5,32 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F0F0F0"
+    android:background="@drawable/background"
     tools:context=".Addtransction">
 
+    <!-- Top Bar -->
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="?attr/actionBarSize"
-        android:background="@drawable/background"
-        android:orientation="horizontal"
+        android:layout_marginTop="40dp"
+        android:background="#34637A"
         android:gravity="center_vertical"
-        tools:ignore="MissingConstraints">
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/Transheading"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="@font/adamina"
             android:paddingStart="16dp"
             android:text="Transactions"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <ImageButton
             android:id="@+id/menuButton"
@@ -34,44 +38,46 @@
             android:layout_height="48dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="Menu"
-            android:padding="12dp"
-            app:tint="@color/white" />
-
+            android:padding="12dp" />
     </LinearLayout>
 
+    <!-- RecyclerView in CardView -->
     <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_margin="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        app:cardBackgroundColor="@android:color/white"
         app:cardCornerRadius="12dp"
         app:cardElevation="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/transactions_recycler_view"
+            android:id="@+id/recyclerViewTransactions"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="8dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_transaction" />
-
+            android:clipToPadding="false"
+            android:paddingVertical="4dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
     </androidx.cardview.widget.CardView>
 
+    <!-- Floating Action Button -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addtrans"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
         android:layout_marginEnd="24dp"
+        android:layout_marginBottom="32dp"
         android:clickable="true"
         android:contentDescription="Add new transaction"
+        app:backgroundTint="#34637A"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/baseline_add_24"
-        app:backgroundTint="#34637A"
-        app:tint="@color/white" />
-
+        app:tint="@android:color/white" />
 </androidx.constraintlayout.widget.ConstraintLayout>

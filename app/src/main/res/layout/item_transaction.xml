@@ -1,6 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="8dp"
+    android:layout_marginVertical="4dp"
+    app:cardBackgroundColor="@android:color/white"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="1dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp">
+
+        <!-- Transaction History Title -->
+        <TextView
+            android:id="@+id/titleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Transaction History"
+            android:textColor="#333333"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="12dp"/>
+
+        <!-- Category Icon -->
+        <TextView
+            android:id="@+id/categoryIcon"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@id/titleTextView"
+            android:gravity="center"
+            android:text="T"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            android:background="@drawable/circle_background"/>
+
+        <!-- Category Name -->
+        <TextView
+            android:id="@+id/textViewCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/categoryIcon"
+            android:layout_below="@id/titleTextView"
+            android:layout_marginStart="12dp"
+            android:text="Groceries"
+            android:textColor="#333333"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+
+        <!-- Transaction Type -->
+        <TextView
+            android:id="@+id/textViewType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/textViewCategory"
+            android:layout_below="@id/titleTextView"
+            android:layout_marginStart="8dp"
+            android:text="(Expense)"
+            android:textColor="#666666"
+            android:textSize="14sp"/>
+
+        <!-- Transaction Note -->
+        <TextView
+            android:id="@+id/textViewNote"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewCategory"
+            android:layout_toEndOf="@id/categoryIcon"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="2dp"
+            android:text="Supermarket purchase"
+            android:textColor="#666666"
+            android:textSize="14sp"/>
+
+        <!-- Amount -->
+        <TextView
+            android:id="@+id/textViewAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/titleTextView"
+            android:text="₹5,000"
+            android:textColor="#E74C3C"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+
+        <!-- Date -->
+        <TextView
+            android:id="@+id/textViewDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/textViewAmount"
+            android:layout_marginTop="2dp"
+            android:text="Jun 5, 2023"
+            android:textColor="#999999"
+            android:textSize="12sp"/>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
