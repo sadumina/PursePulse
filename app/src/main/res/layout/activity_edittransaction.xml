@@ -78,6 +78,7 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="4dp"
                             app:boxBackgroundMode="none"
+                            app:hintTextColor="@android:color/black"
                             app:shapeAppearanceOverlay="@style/CurvedTextInput">
 
                             <com.google.android.material.textfield.TextInputEditText
@@ -86,9 +87,8 @@
                                 android:layout_height="wrap_content"
                                 android:background="@null"
                                 android:hint="Date"
-                                android:textColorHint="@color/black"
-                                android:inputType="date"
-                                />
+                                android:textColorHint="@android:color/black"
+                                android:inputType="date" />
                         </com.google.android.material.textfield.TextInputLayout>
                     </androidx.cardview.widget.CardView>
 
@@ -108,6 +108,7 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="4dp"
                             app:boxBackgroundMode="none"
+                            app:hintTextColor="@android:color/black"
                             app:shapeAppearanceOverlay="@style/CurvedTextInput">
 
                             <com.google.android.material.textfield.TextInputEditText
@@ -116,8 +117,8 @@
                                 android:layout_height="wrap_content"
                                 android:background="@null"
                                 android:hint="Amount"
-                                android:inputType="numberDecimal"
-                                android:textColorHint="#444" />
+                                android:textColorHint="@android:color/black"
+                                android:inputType="numberDecimal" />
                         </com.google.android.material.textfield.TextInputLayout>
                     </androidx.cardview.widget.CardView>
 
