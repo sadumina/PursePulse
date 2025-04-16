@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layoutMonthlyBudget"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F9F9F9"
+    android:padding="24dp">
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/textBudgetTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Monthly Budget"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="#2C3E50" />
+
+    <!-- Budget Input -->
+    <EditText
+        android:id="@+id/editTextBudget"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="Enter monthly budget"
+        android:inputType="numberDecimal"
+        android:padding="12dp" />
+
+    <!-- Spending Summary -->
+    <TextView
+        android:id="@+id/textSpent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Spent: $0.00"
+        android:textSize="18sp"
+        android:textColor="#2C3E50" />
+
+    <!-- Progress Bar -->
+    <ProgressBar
+        android:id="@+id/progressBudget"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="16dp"
+        android:layout_marginTop="12dp"
+        android:progress="50"
+        android:max="100"
+        android:progressDrawable="@drawable/progress_bar_custom" />
+
+    <!-- Warning Text -->
+    <TextView
+        android:id="@+id/textWarning"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Warning: You're close to your limit!"
+        android:textColor="#D32F2F"
+        android:textSize="16sp"
+        android:visibility="gone" />
+
+</LinearLayout>
