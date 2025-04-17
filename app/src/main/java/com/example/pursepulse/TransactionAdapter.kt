@@ -16,7 +16,7 @@ class TransactionAdapter(private val transactionList: List<Transaction>) :
         val amountText: TextView = itemView.findViewById(R.id.textViewAmount)
         val categoryText: TextView = itemView.findViewById(R.id.textViewCategory)
         val typeText: TextView = itemView.findViewById(R.id.textViewType)
-        val updateButton: ImageView = itemView.findViewById(R.id.updatebtn)
+        val updateButton: ImageView = itemView.findViewById(R.id.editIcon)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TransactionViewHolder {
