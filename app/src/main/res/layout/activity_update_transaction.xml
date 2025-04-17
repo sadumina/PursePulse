@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#3F5E7B">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="24dp"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="6dp"
+        app:cardBackgroundColor="@android:color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <!-- Title -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add Transaction"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="24dp" />
+
+            <!-- Date Input -->
+            <EditText
+                android:id="@+id/editTextDate"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:hint="Date"
+                android:background="@drawable/edittext_bg"
+                android:paddingHorizontal="12dp"
+                android:inputType="date"
+                android:textColor="@android:color/black"
+                android:textColorHint="#999999"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Amount Input -->
+            <EditText
+                android:id="@+id/editTextAmount"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:hint="Amount"
+                android:background="@drawable/edittext_bg"
+                android:paddingHorizontal="12dp"
+                android:inputType="numberDecimal"
+                android:textColor="@android:color/black"
+                android:textColorHint="#999999"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Category Label -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Category"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:layout_marginBottom="4dp" />
+
+            <!-- Category Spinner -->
+            <Spinner
+                android:id="@+id/spinnerCategory"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/edittext_bg"
+                android:paddingHorizontal="12dp"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Transaction Type Label -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Transaction Type"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:layout_marginBottom="4dp" />
+
+            <!-- Transaction Type RadioGroup -->
+            <RadioGroup
+                android:id="@+id/radioGroupType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/edittext_bg"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="8dp"
+                android:layout_marginBottom="24dp">
+
+                <RadioButton
+                    android:id="@+id/radioExpense"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Expense" />
+
+                <RadioButton
+                    android:id="@+id/radioIncome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Income"
+                    android:layout_marginStart="24dp" />
+            </RadioGroup>
+
+            <!-- Save Button -->
+            <Button
+                android:id="@+id/updatebtn"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="UPDATE TRANSACTION"
+                android:backgroundTint="#1E2F3E"
+                android:textColor="@android:color/white"
+                android:textAllCaps="true"
+                android:fontFamily="sans-serif-medium"
+                android:background="@drawable/button_rounded_dark" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

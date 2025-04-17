@@ -27,6 +27,19 @@
             android:textStyle="bold"
             android:layout_marginBottom="12dp"/>
 
+        <ImageView
+            android:id="@+id/editIcon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@id/titleTextView"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="4dp"
+            android:src="@drawable/icons8_edit"
+            android:contentDescription="Edit"
+            android:clickable="true"
+            android:focusable="true"/>
+
         <!-- Category Icon -->
         <TextView
             android:id="@+id/categoryIcon"

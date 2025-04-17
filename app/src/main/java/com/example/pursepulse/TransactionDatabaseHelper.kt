@@ -77,5 +77,49 @@ class TransactionDatabaseHelper(context: Context) :
         return transactionList
     }
 
-    // Optional: Add retrieval/update/delete methods here later
+    fun getTransactionById(id: Int): Transaction? {
+        val db = this.readableDatabase
+        val cursor = db.query(
+            TABLE_NAME,
+            null,
+            "$COLUMN_ID = ?",
+            arrayOf(id.toString()),
+            null,
+            null,
+            null
+        )
+
+        var transaction: Transaction? = null
+        if (cursor.moveToFirst()) {
+            val date = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DATE))
+            val amount = cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_AMOUNT))
+            val category = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_CATEGORY))
+            val type = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TYPE))
+            transaction = Transaction(id, date, amount, category, type)
+        }
+
+        cursor.close()
+        db.close()
+        return transaction
+    }
+
+    fun updateTransaction(transaction: Transaction): Boolean {
+        val db = this.writableDatabase
+        val values = ContentValues().apply {
+            put(COLUMN_DATE, transaction.date)
+            put(COLUMN_AMOUNT, transaction.amount)
+            put(COLUMN_CATEGORY, transaction.category)
+            put(COLUMN_TYPE, transaction.type)
+        }
+
+        val result = db.update(
+            TABLE_NAME,
+            values,
+            "$COLUMN_ID = ?",
+            arrayOf(transaction.id.toString())
+        )
+
+        db.close()
+        return result > 0
+    }
 }
