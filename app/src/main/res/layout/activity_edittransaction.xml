@@ -87,8 +87,8 @@
                                 android:layout_height="wrap_content"
                                 android:background="@null"
                                 android:hint="Date"
-                                android:textColorHint="@android:color/black"
-                                android:inputType="date" />
+                                android:inputType="date"
+                                android:textColorHint="@color/black" />
                         </com.google.android.material.textfield.TextInputLayout>
                     </androidx.cardview.widget.CardView>
 

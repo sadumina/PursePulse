@@ -122,4 +122,16 @@ class TransactionDatabaseHelper(context: Context) :
         db.close()
         return result > 0
     }
+
+    fun deleteTransaction(id: Int): Boolean {
+        val db = this.writableDatabase
+        val result = db.delete(
+            TABLE_NAME,
+            "$COLUMN_ID = ?",
+            arrayOf(id.toString())
+        )
+        db.close()
+        return result > 0
+    }
+
 }

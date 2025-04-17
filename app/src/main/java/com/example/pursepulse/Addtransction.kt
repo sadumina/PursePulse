@@ -41,8 +41,16 @@ class Addtransction : AppCompatActivity() {
     }
 
     private fun loadTransactions() {
-        val transactions = dbHelper.getAllTransactions()
-        transactionAdapter = TransactionAdapter(transactions)
-        recyclerView.adapter = transactionAdapter
+        val transactions = dbHelper.getAllTransactions().toMutableList()
+        if (::transactionAdapter.isInitialized) {
+            transactionAdapter.updateList(transactions)
+        } else {
+            transactionAdapter = TransactionAdapter(transactions) { transactionToDelete ->
+                val success = dbHelper.deleteTransaction(transactionToDelete.id)
+                if (success) loadTransactions()
+            }
+            recyclerView.adapter = transactionAdapter
+        }
     }
+
 }

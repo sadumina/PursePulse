@@ -28,12 +28,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Add Transaction"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="@android:color/black"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="24dp" />
+                android:layout_marginBottom="24dp"
+                android:text="Update Your Transaction"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <!-- Date Input -->
             <EditText
@@ -118,12 +118,12 @@
                 android:id="@+id/updatebtn"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:text="UPDATE TRANSACTION"
+                android:background="@drawable/button_rounded_dark"
                 android:backgroundTint="#1E2F3E"
-                android:textColor="@android:color/white"
-                android:textAllCaps="true"
                 android:fontFamily="sans-serif-medium"
-                android:background="@drawable/button_rounded_dark" />
+                android:text="UPDATE TRANSACTION"
+                android:textAllCaps="true"
+                android:textColor="@android:color/black" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,7 +14,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="12dp">
+        android:padding="12dp"
+        tools:ignore="ExtraText">
 
         <!-- Transaction History Title -->
         <TextView
@@ -28,6 +29,18 @@
             android:layout_marginBottom="12dp"/>
 
         <ImageView
+            android:id="@+id/deleteIcon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignTop="@id/titleTextView"
+            android:layout_toStartOf="@id/editIcon"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/baseline_delete_24"
+            android:contentDescription="Delete"
+            android:clickable="true"
+            android:focusable="true"/>
+
+        <ImageView
             android:id="@+id/editIcon"
             android:layout_width="24dp"
             android:layout_height="24dp"
@@ -39,6 +52,8 @@
             android:contentDescription="Edit"
             android:clickable="true"
             android:focusable="true"/>
+
+
 
         <!-- Category Icon -->
         <TextView
