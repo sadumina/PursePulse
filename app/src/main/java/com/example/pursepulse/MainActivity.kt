@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         btnNavigate.setOnClickListener {
             Toast.makeText(this, "Getstarted!", Toast.LENGTH_SHORT).show() // Debugging
 
-            val intent = Intent(this, Addtransction::class.java)
+            val intent = Intent(this, Home::class.java)
             startActivity(intent)
         }
 
