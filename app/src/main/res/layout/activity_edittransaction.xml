@@ -87,6 +87,7 @@
                                 android:layout_height="wrap_content"
                                 android:background="@null"
                                 android:hint="Date"
+                                android:textColor="@color/black"
                                 android:inputType="date"
                                 android:textColorHint="@color/black" />
                         </com.google.android.material.textfield.TextInputLayout>
@@ -117,6 +118,7 @@
                                 android:layout_height="wrap_content"
                                 android:background="@null"
                                 android:hint="Amount"
+                                android:textColor="@color/black"
                                 android:textColorHint="@android:color/black"
                                 android:inputType="numberDecimal" />
                         </com.google.android.material.textfield.TextInputLayout>

@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">PursePulse</string>
+    <string name="home">home\n</string>
+    <string name="transactions">transaction\n</string>
+    <string name="budget">budget</string>
+    <string name="reports">reports</string>
 </resources>

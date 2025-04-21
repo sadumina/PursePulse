@@ -13,6 +13,51 @@
         android:theme="@style/Theme.PursePulse"
         tools:targetApi="31">
         <activity
+            android:name=".utils.ChartUtils"
+            android:exported="false" />
+        <activity
+            android:name=".utils.Extensions"
+            android:exported="false" />
+        <activity
+            android:name=".ui.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.navigation.NavGraph"
+            android:exported="false" />
+        <activity
+            android:name=".ui.navigation.BottomNavView"
+            android:exported="false" />
+        <activity
+            android:name=".ui.budget.BudgetViewModel"
+            android:exported="false" />
+        <activity
+            android:name=".ui.budget.BudgetFragment"
+            android:exported="false" />
+        <activity
+            android:name=".ui.transactions.TransactionsViewModel"
+            android:exported="false" />
+        <activity
+            android:name=".ui.transactions.TransactionAdapter"
+            android:exported="false" />
+        <activity
+            android:name=".ui.transactions.EditTransactionFragment"
+            android:exported="false" />
+        <activity
+            android:name=".ui.transactions.AddTransactionFragment"
+            android:exported="false" />
+        <activity
+            android:name=".ui.home.HomeViewModel"
+            android:exported="false" />
+        <activity
+            android:name=".ui.home.HomeFragment"
+            android:exported="false" />
+        <activity
+            android:name=".data.model.Transaction"
+            android:exported="false" />
+        <activity
+            android:name=".data.local.TransactionDatabaseHelper"
+            android:exported="false" />
+        <activity
             android:name=".Home"
             android:exported="false" />
         <activity
