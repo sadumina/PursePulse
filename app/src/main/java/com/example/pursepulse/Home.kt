@@ -2,9 +2,10 @@ package com.example.pursepulse
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.data.PieData
@@ -13,14 +14,26 @@ import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.utils.ColorTemplate
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
+/* ---------- helper to read the saved budget ---------- */
+private object BudgetPrefs {
+    private const val FILE = "BudgetPrefs"
+    private const val KEY  = "monthly_budget"
+    fun read(ctx: android.content.Context): Int =
+        ctx.getSharedPreferences(FILE, android.content.Context.MODE_PRIVATE)
+            .getInt(KEY, 0)
+}
+
 class Home : AppCompatActivity() {
 
     private lateinit var pieChart: PieChart
     private lateinit var incomePieChart: PieChart
     private lateinit var dbHelper: TransactionDatabaseHelper
 
-    private lateinit var totalIncomeText: TextView
+    private lateinit var totalIncomeText : TextView
     private lateinit var totalExpenseText: TextView
+
+    private lateinit var budgetProgress : ProgressBar
+    private lateinit var budgetWarning  : TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,116 +41,117 @@ class Home : AppCompatActivity() {
 
         dbHelper = TransactionDatabaseHelper(this)
 
-        pieChart = findViewById(R.id.pieChart)
-        incomePieChart = findViewById(R.id.incomePieChart)
-
-        totalIncomeText = findViewById(R.id.totalIncomeText)
+        /* views ------------------------------------------------------------ */
+        pieChart         = findViewById(R.id.pieChart)
+        incomePieChart   = findViewById(R.id.incomePieChart)
+        totalIncomeText  = findViewById(R.id.totalIncomeText)
         totalExpenseText = findViewById(R.id.totalExpenseText)
-
-        setupPieChart()
-        setupIncomePieChart()
-        updateIncomeAndExpenseTotals()
+        budgetProgress   = findViewById(R.id.budgetProgress)   // new
+        budgetWarning    = findViewById(R.id.budgetWarning)    // new
 
         findViewById<Button>(R.id.editbtn).setOnClickListener {
             startActivity(Intent(this, Addtransction::class.java))
         }
-
         findViewById<Button>(R.id.setgoal).setOnClickListener {
             startActivity(Intent(this, set_budget::class.java))
         }
 
-        val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_navigation)
-        bottomNavigationView.setOnItemSelectedListener { item ->
+        val bottomNav: BottomNavigationView = findViewById(R.id.bottom_navigation)
+        bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.nav_home -> true
-                R.id.nav_transactions -> {
-                    startActivity(Intent(this, Edittransaction::class.java))
-                    true
-                }
-                R.id.nav_profile -> {
-                    startActivity(Intent(this, set_budget::class.java))
-                    true
-                }
+                R.id.nav_home         -> true
+                R.id.nav_transactions -> { startActivity(Intent(this, Edittransaction::class.java)); true }
+                R.id.nav_profile      -> { startActivity(Intent(this, set_budget::class.java)); true }
                 else -> false
             }
         }
     }
 
+    /* refresh everything whenever the user returns to Home */
+    override fun onResume() {
+        super.onResume()
+        updateIncomeAndExpenseTotals()
+        setupPieChart()
+        setupIncomePieChart()
+        updateBudgetProgress()          // <‑‑ new
+    }
+
+    /* ---------- budget progress bar & warning ---------- */
+    private fun updateBudgetProgress() {
+        val budget = BudgetPrefs.read(this)
+        if (budget == 0) {                              // user hasn’t set a goal yet
+            budgetProgress.visibility = View.GONE
+            budgetWarning.text = ""
+            return
+        }
+        budgetProgress.visibility = View.VISIBLE
+
+        val spent = dbHelper.getAllTransactions()
+            .filter { it.type.equals("Expense", true) }
+            .sumOf { it.amount }
+
+        val percent = ((spent / budget) * 100).toInt().coerceAtMost(100)
+        budgetProgress.progress = percent
+
+        budgetWarning.text = when {
+            percent >= 100 -> "⚠ Budget Exceeded!"
+            percent >= 80  -> "⚠ You’re close to your budget!"
+            else           -> ""
+        }
+    }
+
+    /* ---------- totals ---------- */
     private fun updateIncomeAndExpenseTotals() {
-        val transactions = dbHelper.getAllTransactions()
-        val totalIncome = transactions.filter { it.type.equals("Income", ignoreCase = true) }
-            .sumOf { it.amount }
+        val tx = dbHelper.getAllTransactions()
+        val income  = tx.filter { it.type.equals("Income",  true) }.sumOf { it.amount }
+        val expense = tx.filter { it.type.equals("Expense", true) }.sumOf { it.amount }
 
-        val totalExpense = transactions.filter { it.type.equals("Expense", ignoreCase = true) }
-            .sumOf { it.amount }
-
-        totalIncomeText.text = "Rs.%.2f".format(totalIncome)
-        totalExpenseText.text = "Rs.%.2f".format(totalExpense)
+        totalIncomeText .text = "Rs.%.2f".format(income)
+        totalExpenseText.text = "Rs.%.2f".format(expense)
     }
 
-    private fun setupPieChart() {
-        val transactions = dbHelper.getAllTransactions()
-        val expenseTransactions = transactions.filter { it.type.equals("Expense", ignoreCase = true) }
+    /* ---------- pie charts ---------- */
+    private fun setupPieChart()          = loadPie(
+        chart   = pieChart,
+        entries = buildEntries("Expense"),
+        title   = "Expenses",
+        colors  = ColorTemplate.MATERIAL_COLORS.toList()
+    )
 
-        val categorySums = expenseTransactions.groupBy { it.category }
-            .mapValues { it.value.sumOf { t -> t.amount } }
+    private fun setupIncomePieChart()    = loadPie(
+        chart   = incomePieChart,
+        entries = buildEntries("Income"),
+        title   = "Income",
+        colors  = ColorTemplate.COLORFUL_COLORS.toList()
+    )
 
-        val entries = ArrayList<PieEntry>()
-        for ((category, total) in categorySums) {
-            entries.add(PieEntry(total.toFloat(), category))
-        }
+    private fun buildEntries(type: String): List<PieEntry> =
+        dbHelper.getAllTransactions()
+            .filter { it.type.equals(type, true) }
+            .groupBy { it.category }
+            .map { (cat, list) -> PieEntry(list.sumOf { it.amount }.toFloat(), cat) }
 
+    private fun loadPie(
+        chart: PieChart,
+        entries: List<PieEntry>,
+        title: String,
+        colors: List<Int>
+    ) {
         if (entries.isEmpty()) {
-            pieChart.clear()
-            pieChart.centerText = "No expense data"
-            return
+            chart.clear(); chart.centerText = "No $title data"; return
         }
-
-        val dataSet = PieDataSet(entries, "Expenses")
-        dataSet.colors = ColorTemplate.MATERIAL_COLORS.toList()
-        dataSet.sliceSpace = 2f
-        dataSet.valueTextSize = 12f
-
-        pieChart.data = PieData(dataSet)
-        pieChart.description.isEnabled = false
-        pieChart.setUsePercentValues(true)
-        pieChart.setDrawEntryLabels(true)
-        pieChart.setEntryLabelTextSize(12f)
-        pieChart.setCenterText("Expenses")
-        pieChart.animateY(1000)
-        pieChart.invalidate()
-    }
-
-    private fun setupIncomePieChart() {
-        val transactions = dbHelper.getAllTransactions()
-        val incomeTransactions = transactions.filter { it.type.equals("Income", ignoreCase = true) }
-
-        val categorySums = incomeTransactions.groupBy { it.category }
-            .mapValues { it.value.sumOf { t -> t.amount } }
-
-        val entries = ArrayList<PieEntry>()
-        for ((category, total) in categorySums) {
-            entries.add(PieEntry(total.toFloat(), category))
+        val ds = PieDataSet(entries, title).apply {
+            this.colors = colors
+            sliceSpace  = 2f
+            valueTextSize = 12f
         }
-
-        if (entries.isEmpty()) {
-            incomePieChart.clear()
-            incomePieChart.centerText = "No income data"
-            return
-        }
-
-        val dataSet = PieDataSet(entries, "Income")
-        dataSet.colors = ColorTemplate.COLORFUL_COLORS.toList()
-        dataSet.sliceSpace = 2f
-        dataSet.valueTextSize = 12f
-
-        incomePieChart.data = PieData(dataSet)
-        incomePieChart.description.isEnabled = false
-        incomePieChart.setUsePercentValues(true)
-        incomePieChart.setDrawEntryLabels(true)
-        incomePieChart.setEntryLabelTextSize(12f)
-        incomePieChart.setCenterText("Income")
-        incomePieChart.animateY(1000)
-        incomePieChart.invalidate()
+        chart.data = PieData(ds)
+        chart.description.isEnabled = false
+        chart.setUsePercentValues(true)
+        chart.setDrawEntryLabels(true)
+        chart.setEntryLabelTextSize(12f)
+        chart.setCenterText(title)
+        chart.animateY(1000)
+        chart.invalidate()
     }
 }

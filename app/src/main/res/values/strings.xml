@@ -4,4 +4,7 @@
     <string name="transactions">transaction\n</string>
     <string name="budget">budget</string>
     <string name="reports">reports</string>
+    <string name="hint_budget">hint_budget</string>
+    <string name="btn_set_budget">btn_set_budget</string>
+    <string name="set_budget">set_budget</string>
 </resources>

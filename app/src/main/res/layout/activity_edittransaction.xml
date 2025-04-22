@@ -97,7 +97,7 @@
                                     android:hint="Date"
                                     android:inputType="date"
                                     android:textColor="@color/black"
-                                    android:textColorHint="@color/black" />
+                                    android:textColorHint="@color/blue" />
                             </com.google.android.material.textfield.TextInputLayout>
                         </androidx.cardview.widget.CardView>
 
