@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.pursepulse.databinding.ActivityEdittransactionBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class Edittransaction : AppCompatActivity() {
 
@@ -88,5 +89,32 @@ class Edittransaction : AppCompatActivity() {
                 Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
             }
         }
+
+        val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_navigation)
+        bottomNavigationView.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_home -> {
+                    Toast.makeText(this, "Home", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this, Home::class.java))
+                    true
+                }
+                R.id.nav_transactions -> {
+                    Toast.makeText(this, "Transactions", Toast.LENGTH_SHORT).show()
+
+
+                    true
+                }
+                R.id.nav_profile -> {
+                    Toast.makeText(this, "Profile", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this, set_budget::class.java))
+
+
+                    true
+                }
+                else -> false
+            }
+        }
+
     }
+
 }
