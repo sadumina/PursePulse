@@ -51,8 +51,20 @@ class TransactionAdapter(
 
         // Delete click
         holder.deleteButton.setOnClickListener {
-            onDeleteClick(transaction)
+            val context = holder.itemView.context
+            val builder = androidx.appcompat.app.AlertDialog.Builder(context)
+            builder.setTitle("Delete Transaction")
+            builder.setMessage("Are you sure you want to delete this transaction?")
+            builder.setPositiveButton("OK") { dialog, _ ->
+                onDeleteClick(transaction)
+                dialog.dismiss()
+            }
+            builder.setNegativeButton("Cancel") { dialog, _ ->
+                dialog.dismiss()
+            }
+            builder.create().show()
         }
+
     }
 
     override fun getItemCount(): Int = transactionList.size

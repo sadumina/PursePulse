@@ -31,13 +31,13 @@ class UpdateTransaction : AppCompatActivity() {
             return
         }
 
-        // Set up category spinner
+
         val categories = arrayOf("Food", "Transportation", "Entertainment", "Utilities", "Shopping", "Health", "Education", "Other")
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, categories)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinnerCategory.adapter = adapter
 
-        // Load transaction details
+
         val transaction = db.getTransactionById(transactionId)
         if (transaction != null) {
             binding.editTextDate.setText(transaction.date)

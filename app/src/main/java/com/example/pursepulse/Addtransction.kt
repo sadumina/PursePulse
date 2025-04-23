@@ -17,17 +17,17 @@ class Addtransction : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_addtransction)
 
-        // Initialize RecyclerView
+
         recyclerView = findViewById(R.id.recyclerViewTransactions)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        // Initialize DB
+
         dbHelper = TransactionDatabaseHelper(this)
 
-        // Load transactions
+
         loadTransactions()
 
-        // Floating Action Button
+
         val fab: FloatingActionButton = findViewById(R.id.addtrans)
         fab.setOnClickListener {
             val intent = Intent(this, Edittransaction::class.java)
