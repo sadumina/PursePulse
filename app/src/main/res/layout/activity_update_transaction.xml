@@ -118,12 +118,11 @@
                 android:id="@+id/updatebtn"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:background="@drawable/button_rounded_dark"
                 android:backgroundTint="#2C3E50"
                 android:fontFamily="sans-serif-medium"
                 android:text="UPDATE TRANSACTION"
                 android:textAllCaps="true"
-                android:textColor="@android:color/black" />
+                android:textColor="@android:color/white" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

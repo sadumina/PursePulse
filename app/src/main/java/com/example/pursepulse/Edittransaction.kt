@@ -27,7 +27,7 @@ class Edittransaction : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        val categories = listOf("Food", "Transport", "Bills", "Entertainment")
+        val categories = listOf("Food", "Transport", "Bills", "Entertainment" , "Salary", "Business", "Freelancing", "Investments", "Gifts", "Rental Income", "Interest", "Dividends", "Cashback", "Selling Stuff", "Refunds", "Other Income")
         val adapter = ArrayAdapter(
             this,
             android.R.layout.simple_spinner_dropdown_item,

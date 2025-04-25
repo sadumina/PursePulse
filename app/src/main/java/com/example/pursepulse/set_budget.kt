@@ -91,11 +91,11 @@ class set_budget : AppCompatActivity() {
         when {
             percentage >= 100 -> {
                 warningText.visibility = View.VISIBLE
-                warningText.text = "⚠ Budget Exceeded!"
+                warningText.text = " Budget Exceeded!"
             }
             percentage >= 80 -> {
                 warningText.visibility = View.VISIBLE
-                warningText.text = "⚠ You’re close to your budget!"
+                warningText.text = " You’re close to your budget!"
             }
             else -> {
                 warningText.visibility = View.GONE
